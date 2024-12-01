@@ -1,2 +1,78 @@
-# solar
-solar calculator
+# solar calculator
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .hidden { display: none; }
+    .form-group { margin-bottom: 15px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; }
+    select, input { width: 100%; padding: 10px; margin-bottom: 10px; }
+    button { padding: 10px 20px; background: #007bff; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Solar Calculator</h1>
+  <form id="solarForm">
+    <div class="form-group">
+      <label for="systemType">System Type:</label>
+      <select id="systemType" name="systemType">
+        <option value="">Select</option>
+        <option value="on-grid">On-Grid</option>
+        <option value="off-grid">Off-Grid</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="wiringType">Wiring Options:</label>
+      <select id="wiringType" name="wiringType">
+        <option value="">Select</option>
+        <option value="ac">AC Wiring</option>
+        <option value="dc">DC Wiring</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="inverterBrand">Inverter Brands:</label>
+      <select id="inverterBrand" name="inverterBrand">
+        <option value="">Select</option>
+        <option value="brand-a">Brand A</option>
+        <option value="brand-b">Brand B</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div id="otherInverter" class="form-group hidden">
+      <label for="customInverterBrand">Enter Custom Inverter Brand:</label>
+      <input type="text" id="customInverterBrand" name="customInverterBrand" />
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const inverterBrandSelect = document.getElementById("inverterBrand");
+    const otherInverterInput = document.getElementById("otherInverter");
+
+    inverterBrandSelect.addEventListener("change", () => {
+      if (inverterBrandSelect.value === "other") {
+        otherInverterInput.classList.remove("hidden");
+      } else {
+        otherInverterInput.classList.add("hidden");
+      }
+    });
+
+    document.getElementById("solarForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      console.log(Object.fromEntries(formData)); // Replace this with API call if backend exists
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>
